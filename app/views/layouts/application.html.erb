@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cup Throw</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "cup throw", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", root_path %></li>
+            <% if logged_in? %>
+              <li><%= link_to "Users", '/users' %></li>
+              <li><%= link_to "Profile", current_user %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Log out", logout_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign up", signup_path %></li>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

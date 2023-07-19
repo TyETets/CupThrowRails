@@ -1,0 +1,63 @@
+<p style="color: green"><%= notice %></p>
+
+<% if !logged_in? %>
+  <script type="text/javascript">
+    window.location.href="/login"
+  </script>
+<% end %>
+
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+        <% if logged_in? && @user == current_user %>
+          (Your account)
+        <% end %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<%= render @user %>
+
+<div>
+  <% if logged_in? && @user == current_user %>
+    <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% end %>
+  <%= link_to "Back to users", users_path %>
+  
+  <% if logged_in? && @user == current_user %>
+    <%= button_to "Delete Account", @user, method: :delete %>
+    <br>
+    <h3>Your items</h3>
+    <p>Coin 1</p>
+    <p>Denomination: 0.25</p>
+    <p>Current Side up: nil</p>
+    <br>
+    <p>Coin 2</p>
+    <p>Denomination: 0.25</p>
+    <p>Current Side up: nil</p>
+    <br>
+    <p>Coin 3</p>
+    <p>Denomination: 0.25</p>
+    <p>Current Side up: nil</p>
+    <br>
+    <p>Die 1</p>
+    <p>Colour: White</p>
+    <p>Sides: 6</p>
+    <p>Current Side up: nil</p>
+    <br>
+    <p>Die 2</p>
+    <p>Colour: White</p>
+    <p>Sides: 6</p>
+    <p>Current Side up: nil</p>
+    <br>
+    <p>Die 3</p>
+    <p>Colour: White</p>
+    <p>Sides: 6</p>
+    <p>Current Side up: nil</p>
+  <% end %>
+</div>
